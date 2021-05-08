@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/home/mohamad/acados/include",
+                "/home/mohamad/acados/external/blasfeo/include",
+                "/home/mohamad/acados/external/hpipm/include",
+                "/home/mohamad/Desktop/solver_test_2/include",
+                "/home/mohamad/Desktop/solver_test_2/"
+
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/g++",
+            "cStandard": "c11",
+            "cppStandard": "c++14",
+            "intelliSenseMode": "gcc-x64"
+        }
+    ],
+    "version": 4
+}

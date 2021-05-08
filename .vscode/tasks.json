@@ -1,0 +1,58 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "cppbuild",
+			"label": "C/C++: g++ build active file mohamad",
+			"command": "/usr/bin/g++",
+			"args": [
+				"-g",
+				"/home/mohamad/Desktop/solver_test_2/src/main.cpp",
+				"-g",
+				"/home/mohamad/Desktop/solver_test_2/src/generate_path.cpp",
+				"-g",
+				"/home/mohamad/Desktop/solver_test_2/src/generate_bubbles.cpp",		
+				"-g",
+				"/home/mohamad/Desktop/solver_test_2/src/call_acados_model.cpp",				
+				"-l",
+				"acados",
+				"-l",
+				"rockitmmap",
+				"-l",
+				"acados_ocp_solver_rockit_model",
+				"-L",
+				"/home/mohamad/acados/lib/",
+				"-L",
+				"/home/mohamad/Desktop/solver_test_2/",
+				"-L",
+				"c_generated_code/",
+				"-I",
+				".",
+				"-I",
+				"/home/mohamad/Desktop/solver_test_2/include/",
+				"-I",
+				"/home/mohamad/acados/include/",
+				"-I",
+				"/home/mohamad/acados/external/blasfeo/include/",
+				"-I",				
+				"/home/mohamad/acados/external/hpipm/include/",
+				"-Wl,-rpath=$(pwd)/c_generated_code",
+				"-L.",
+				"-Wl,-rpath=.",
+				"-o",
+				"${fileDirname}/${fileBasenameNoExtension}"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"detail": "compiler: /usr/bin/g++"
+		}
+	]
+}
