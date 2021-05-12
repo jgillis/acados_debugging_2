@@ -174,8 +174,9 @@ br       =  ocp.parameter(N)
 
 ocp.set_value(bx, shifted_midpoints_x[0:N])
 ocp.set_value(by, shifted_midpoints_y[0:N])
-ocp.set_value(br, shifted_radii[0:N])
+# ocp.set_value(br, shifted_radii[0:N])
 
+ocp.set_value(br, 100*np.ones(N))
 
 ocp.subject_to(ocp.at_tf(s_obs) <= 1)    # effect unclear === the path given is long = first ocp iteration will not get there if dt is small
 
@@ -183,6 +184,8 @@ obs_spline_x = interpolant('x','bspline',[tunnel_s1], 1  , {"algorithm": "smooth
 obs_spline_y = interpolant('y','bspline',[tunnel_s1], 1  , {"algorithm": "smooth_linear","smooth_linear_frac":0.49})
 obs_spline_r = interpolant('r','bspline',[tunnel_s1], 1  , {"algorithm": "smooth_linear","smooth_linear_frac":0.49})
 
+
+ocp.subject_to(  x  > 0 )
 
 ocp.subject_to(   ( x - obs_spline_x(s_obs,bx) )**2 + ( y - obs_spline_y(s_obs,by) )**2  - (obs_spline_r(s_obs,br))**2 < 0)
 

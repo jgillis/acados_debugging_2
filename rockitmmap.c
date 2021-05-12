@@ -31,6 +31,7 @@ extern "C" {
 #define casadi_s2 CASADI_PREFIX(s2)
 #define casadi_s3 CASADI_PREFIX(s3)
 #define casadi_s4 CASADI_PREFIX(s4)
+#define casadi_s5 CASADI_PREFIX(s5)
 
 /* Symbol visibility in DLLs */
 #ifndef CASADI_SYMBOL_EXPORT
@@ -64,71 +65,96 @@ void casadi_copy(const casadi_real* x, casadi_int n, casadi_real* y) {
 
 static const casadi_int casadi_s0[70] = {66, 1, 0, 66, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65};
 static const casadi_int casadi_s1[5] = {1, 1, 0, 1, 0};
-static const casadi_int casadi_s2[4] = {0, 1, 0, 0};
-static const casadi_int casadi_s3[7] = {3, 1, 0, 3, 0, 1, 2};
-static const casadi_int casadi_s4[9] = {5, 1, 0, 5, 0, 1, 2, 3, 4};
+static const casadi_int casadi_s2[7] = {3, 1, 0, 3, 0, 1, 2};
+static const casadi_int casadi_s3[4] = {0, 1, 0, 0};
+static const casadi_int casadi_s4[6] = {2, 1, 0, 2, 0, 1};
+static const casadi_int casadi_s5[10] = {6, 1, 0, 6, 0, 1, 2, 3, 4, 5};
 
-/* rockitmmap:(p[66],t)->(lbx[0],ubx[0],lbu[3],ubu[3],C[0],D[0],lg[0],ug[0],lh,uh,lh_e,uh_e,lbx_e,ubx_e,C_e[0],lg_e[0],ug_e[0],lbx_0[5],ubx_0[5]) */
+/* rockitmmap:(p[66],t)->(lbx,ubx,lbu[3],ubu[3],C[0],D[0],lg[0],ug[0],lh,uh,lh_e,uh_e,lbx_e[2],ubx_e[2],C_e[0],lg_e[0],ug_e[0],lbx_0[6],ubx_0[6]) */
 static int casadi_f0(const casadi_real** arg, casadi_real** res, casadi_int* iw, casadi_real* w, int mem) {
   casadi_real w0, w1, *w2=w+2;
   /* #0: @0 = 0 */
   w0 = 0.;
-  /* #1: output[2][0] = @0 */
-  if (res[2]) res[2][0] = w0;
-  /* #2: @0 = -3.14159 */
-  w0 = -3.1415926535897931e+00;
-  /* #3: output[2][1] = @0 */
-  if (res[2]) res[2][1] = w0;
+  /* #1: output[0][0] = @0 */
+  if (res[0]) res[0][0] = w0;
+  /* #2: @0 = inf */
+  w0 = casadi_inf;
+  /* #3: output[1][0] = @0 */
+  if (res[1]) res[1][0] = w0;
   /* #4: @0 = 0 */
   w0 = 0.;
-  /* #5: output[2][2] = @0 */
+  /* #5: output[2][0] = @0 */
+  if (res[2]) res[2][0] = w0;
+  /* #6: @0 = -3.14159 */
+  w0 = -3.1415926535897931e+00;
+  /* #7: output[2][1] = @0 */
+  if (res[2]) res[2][1] = w0;
+  /* #8: @0 = 0 */
+  w0 = 0.;
+  /* #9: output[2][2] = @0 */
   if (res[2]) res[2][2] = w0;
-  /* #6: @0 = 1 */
+  /* #10: @0 = 1 */
   w0 = 1.;
-  /* #7: output[3][0] = @0 */
+  /* #11: output[3][0] = @0 */
   if (res[3]) res[3][0] = w0;
-  /* #8: @0 = 3.14159 */
+  /* #12: @0 = 3.14159 */
   w0 = 3.1415926535897931e+00;
-  /* #9: output[3][1] = @0 */
+  /* #13: output[3][1] = @0 */
   if (res[3]) res[3][1] = w0;
-  /* #10: @0 = inf */
+  /* #14: @0 = inf */
   w0 = casadi_inf;
-  /* #11: output[3][2] = @0 */
+  /* #15: output[3][2] = @0 */
   if (res[3]) res[3][2] = w0;
-  /* #12: @0 = -inf */
+  /* #16: @0 = -inf */
   w0 = -casadi_inf;
-  /* #13: output[8][0] = @0 */
+  /* #17: output[8][0] = @0 */
   if (res[8]) res[8][0] = w0;
-  /* #14: @1 = 0 */
+  /* #18: @1 = 0 */
   w1 = 0.;
-  /* #15: output[9][0] = @1 */
+  /* #19: output[9][0] = @1 */
   if (res[9]) res[9][0] = w1;
-  /* #16: output[10][0] = @0 */
+  /* #20: output[10][0] = @0 */
   if (res[10]) res[10][0] = w0;
-  /* #17: output[11][0] = @1 */
+  /* #21: output[11][0] = @1 */
   if (res[11]) res[11][0] = w1;
-  /* #18: @1 = -inf */
-  w1 = -casadi_inf;
-  /* #19: output[12][0] = @1 */
+  /* #22: @1 = 0 */
+  w1 = 0.;
+  /* #23: output[12][0] = @1 */
   if (res[12]) res[12][0] = w1;
-  /* #20: @1 = 1 */
-  w1 = 1.;
-  /* #21: output[13][0] = @1 */
+  /* #24: @1 = -inf */
+  w1 = -casadi_inf;
+  /* #25: output[12][1] = @1 */
+  if (res[12]) res[12][1] = w1;
+  /* #26: @1 = inf */
+  w1 = casadi_inf;
+  /* #27: output[13][0] = @1 */
   if (res[13]) res[13][0] = w1;
-  /* #22: @2 = input[0][0] */
+  /* #28: @1 = 1 */
+  w1 = 1.;
+  /* #29: output[13][1] = @1 */
+  if (res[13]) res[13][1] = w1;
+  /* #30: @1 = 0 */
+  w1 = 0.;
+  /* #31: output[17][0] = @1 */
+  if (res[17]) res[17][0] = w1;
+  /* #32: @2 = input[0][0] */
   casadi_copy(arg[0], 4, w2);
-  /* #23: output[17][0] = @2 */
-  casadi_copy(w2, 4, res[17]);
-  /* #24: @1 = 0 */
+  /* #33: output[17][1] = @2 */
+  if (res[17]) casadi_copy(w2, 4, res[17]+1);
+  /* #34: @1 = 0 */
   w1 = 0.;
-  /* #25: output[17][1] = @1 */
-  if (res[17]) res[17][4] = w1;
-  /* #26: output[18][0] = @2 */
-  casadi_copy(w2, 4, res[18]);
-  /* #27: @1 = 0 */
+  /* #35: output[17][2] = @1 */
+  if (res[17]) res[17][5] = w1;
+  /* #36: @1 = inf */
+  w1 = casadi_inf;
+  /* #37: output[18][0] = @1 */
+  if (res[18]) res[18][0] = w1;
+  /* #38: output[18][1] = @2 */
+  if (res[18]) casadi_copy(w2, 4, res[18]+1);
+  /* #39: @1 = 0 */
   w1 = 0.;
-  /* #28: output[18][1] = @1 */
-  if (res[18]) res[18][4] = w1;
+  /* #40: output[18][2] = @1 */
+  if (res[18]) res[18][5] = w1;
   return 0;
 }
 
@@ -213,25 +239,25 @@ CASADI_SYMBOL_EXPORT const casadi_int* rockitmmap_sparsity_in(casadi_int i) {
 
 CASADI_SYMBOL_EXPORT const casadi_int* rockitmmap_sparsity_out(casadi_int i) {
   switch (i) {
-    case 0: return casadi_s2;
-    case 1: return casadi_s2;
-    case 2: return casadi_s3;
-    case 3: return casadi_s3;
-    case 4: return casadi_s2;
-    case 5: return casadi_s2;
-    case 6: return casadi_s2;
-    case 7: return casadi_s2;
+    case 0: return casadi_s1;
+    case 1: return casadi_s1;
+    case 2: return casadi_s2;
+    case 3: return casadi_s2;
+    case 4: return casadi_s3;
+    case 5: return casadi_s3;
+    case 6: return casadi_s3;
+    case 7: return casadi_s3;
     case 8: return casadi_s1;
     case 9: return casadi_s1;
     case 10: return casadi_s1;
     case 11: return casadi_s1;
-    case 12: return casadi_s1;
-    case 13: return casadi_s1;
-    case 14: return casadi_s2;
-    case 15: return casadi_s2;
-    case 16: return casadi_s2;
-    case 17: return casadi_s4;
-    case 18: return casadi_s4;
+    case 12: return casadi_s4;
+    case 13: return casadi_s4;
+    case 14: return casadi_s3;
+    case 15: return casadi_s3;
+    case 16: return casadi_s3;
+    case 17: return casadi_s5;
+    case 18: return casadi_s5;
     default: return 0;
   }
 }

@@ -210,8 +210,8 @@ void Controller::set_parameters(){
     for(int i = 0; i<N; i++){
         p[6+i]     = midpoints_x[i];
         p[6+N+i]   = midpoints_y[i];
-        p[6+2*N+i] = radii[i];
-        // p[6+2*N+i] = 100;     //makind rad bigger does not solve the problem
+        // p[6+2*N+i] = radii[i];
+        p[6+2*N+i] = 1; 
     }
 
 }
@@ -227,25 +227,6 @@ void Controller::set_constraints(){
         lbx0[i] = outputs["lbx_0"][i];
         // std::cout<< "lbx0["<< i << "] = " << lbx0[i] <<std::endl;
     }
-
-    for(int i = 0; i < nu; i++){
-        lbu[i] = outputs["lbu"][i];                
-        // std::cout << "lbu["<< i << "] = " << lbu[i] <<std::endl;
-    }
-
-    for(int i = 0; i < nu; i++){
-        ubu[i] = outputs["ubu"][i];                
-        // std::cout << "ubu["<< i << "] = " << ubu[i] <<std::endl;
-    }
-
-    // bubble constraints 
-    lh[0]   = outputs["lh"][0];
-    uh[0]   = 0;                               //make = 100 no solver fail
-    lh_e[0] = outputs["lh_e"][0];
-    uh_e[0] = 0;
-
-    lbx_e[0] = outputs["lbx_e"][0];
-    ubx_e[0] = outputs["ubx_e"][0];
 
 }
 
@@ -272,7 +253,10 @@ void Controller::init(){
 
     // to get equivalence with solver from python 
 
-    char globalization[] = "merit_backtracking"; 
+    // char globalization[] = "merit_backtracking"; 
+    // ocp_nlp_solver_opts_set(nlp_config, nlp_opts, "globalization",&globalization);
+
+    char globalization[] = "fixed_step";  // because look at json model
     ocp_nlp_solver_opts_set(nlp_config, nlp_opts, "globalization",&globalization);
 
  
@@ -344,21 +328,6 @@ void Controller::run_acados_solver()
     //--------------- INITIAL CONDITIONS 
     ocp_nlp_constraints_model_set(nlp_config, nlp_dims, nlp_in, 0, "lbx",   lbx0); 
     ocp_nlp_constraints_model_set(nlp_config, nlp_dims, nlp_in, 0, "ubx",   ubx0);
-
-    //--------------- Path constraints
-    for (int i = 0; i < N; i++)
-    {
-        ocp_nlp_constraints_model_set(nlp_config, nlp_dims, nlp_in, i, "ubu", ubu);
-        ocp_nlp_constraints_model_set(nlp_config, nlp_dims, nlp_in, i, "lbu", lbu);
-        ocp_nlp_constraints_model_set(nlp_config, nlp_dims, nlp_in, i, "lh",  lh);
-        ocp_nlp_constraints_model_set(nlp_config, nlp_dims, nlp_in, i, "uh",  uh);
-    }
-
-    //--------------- End constraints
-    ocp_nlp_constraints_model_set(nlp_config, nlp_dims, nlp_in, N, "lh",  lh_e);
-    ocp_nlp_constraints_model_set(nlp_config, nlp_dims, nlp_in, N, "uh",  uh_e);
-    ocp_nlp_constraints_model_set(nlp_config, nlp_dims, nlp_in, N, "ubx", ubx_e);
-    ocp_nlp_constraints_model_set(nlp_config, nlp_dims, nlp_in, N, "lbx", lbx_e);
 
 
     // ------------------- set parameters ------------------------------------------------

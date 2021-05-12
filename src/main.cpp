@@ -48,7 +48,6 @@ int main(int argc, char **argv){
   model.state_theta     = 0;
   model.state_s         = 0; 
 
-
   // extend number of bubbles to be = N 
 
   double bub_size = bubbles.midpoints_x.size();
@@ -66,27 +65,17 @@ int main(int argc, char **argv){
           model.radii[i]       = bubbles.radii[bub_size-1];
       }
   }
-
-  std::cout<<"here2"<<std::endl;
-
+  
   model.init();
   model.monitor_mmap_outputs = true;
   model.monitor_parameters   = false;
   model.print_solver_stats   = true;
 
+
   //  Solve 1st time 
 
   model.run_acados_solver();
 
-  // solve 2nd time 
-
-  // model.state_x         = model.x_sol[0];
-  // model.state_y         = model.y_sol[0];
-  // model.state_theta     = model.theta_sol[0];
-  // model.state_s         = model.s_sol[0]; 
-
-
-  // model.run_acados_solver();
 
   return 0;
 

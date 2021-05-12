@@ -63,11 +63,13 @@ int main()
 
   
     x_current[0] = 0;
+    x_current[0] = 0;
     x_current[1] = 0;
     x_current[2] = 0;
     x_current[3] = 0;
     x_current[4] = 0;
     
+    printf("main_sim: NOTE: initial state not fully defined via lbx_0, using 0.0 for indices that are not in idxbx_0.");
   
 
 
@@ -171,45 +173,45 @@ int main()
     
     p[45] = 2.85;
     
-    p[46] = 1;
+    p[46] = 100;
     
-    p[47] = 1;
+    p[47] = 100;
     
-    p[48] = 1;
+    p[48] = 100;
     
-    p[49] = 1;
+    p[49] = 100;
     
-    p[50] = 1;
+    p[50] = 100;
     
-    p[51] = 1;
+    p[51] = 100;
     
-    p[52] = 1;
+    p[52] = 100;
     
-    p[53] = 1;
+    p[53] = 100;
     
-    p[54] = 1;
+    p[54] = 100;
     
-    p[55] = 1;
+    p[55] = 100;
     
-    p[56] = 1;
+    p[56] = 100;
     
-    p[57] = 1;
+    p[57] = 100;
     
-    p[58] = 1;
+    p[58] = 100;
     
-    p[59] = 1;
+    p[59] = 100;
     
-    p[60] = 1;
+    p[60] = 100;
     
-    p[61] = 1;
+    p[61] = 100;
     
-    p[62] = 1;
+    p[62] = 100;
     
-    p[63] = 1;
+    p[63] = 100;
     
-    p[64] = 1;
+    p[64] = 100;
     
-    p[65] = 1;
+    p[65] = 100;
     
 
     rockit_model_acados_sim_update_params(p, 66);

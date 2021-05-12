@@ -80,6 +80,10 @@ i_in = 2;
 input_note = strcat(input_note, num2str(i_in), ') parameters - concatenated for all stages,',...
                     ' size [1386]\n ');
 i_in = i_in + 1;
+input_note = strcat(input_note, num2str(i_in), ') lbx, size [1]\n ');
+i_in = i_in + 1;
+input_note = strcat(input_note, num2str(i_in), ') ubx, size [1]\n ');
+i_in = i_in + 1;
 input_note = strcat(input_note, num2str(i_in), ') lbu, size [3]\n ');
 i_in = i_in + 1;
 input_note = strcat(input_note, num2str(i_in), ') ubu, size [3]\n ');

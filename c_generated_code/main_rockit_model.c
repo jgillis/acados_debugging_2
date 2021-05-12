@@ -63,17 +63,18 @@ int main()
     void *nlp_opts = rockit_model_acados_get_nlp_opts(acados_ocp_capsule);
 
     // initial condition
-    int idxbx0[5];
+    int idxbx0[6];
     idxbx0[0] = 0;
-    idxbx0[1] = 1;
-    idxbx0[2] = 2;
-    idxbx0[3] = 3;
-    idxbx0[4] = 4;
+    idxbx0[1] = 0;
+    idxbx0[2] = 1;
+    idxbx0[3] = 2;
+    idxbx0[4] = 3;
+    idxbx0[5] = 4;
 
-    double lbx0[5];
-    double ubx0[5];
+    double lbx0[6];
+    double ubx0[6];
     lbx0[0] = 0;
-    ubx0[0] = 0;
+    ubx0[0] = 100000;
     lbx0[1] = 0;
     ubx0[1] = 0;
     lbx0[2] = 0;
@@ -82,6 +83,8 @@ int main()
     ubx0[3] = 0;
     lbx0[4] = 0;
     ubx0[4] = 0;
+    lbx0[5] = 0;
+    ubx0[5] = 0;
 
     ocp_nlp_constraints_model_set(nlp_config, nlp_dims, nlp_in, 0, "idxbx", idxbx0);
     ocp_nlp_constraints_model_set(nlp_config, nlp_dims, nlp_in, 0, "lbx", lbx0);
@@ -195,45 +198,45 @@ int main()
     
     p[45] = 2.85;
     
-    p[46] = 1;
+    p[46] = 100;
     
-    p[47] = 1;
+    p[47] = 100;
     
-    p[48] = 1;
+    p[48] = 100;
     
-    p[49] = 1;
+    p[49] = 100;
     
-    p[50] = 1;
+    p[50] = 100;
     
-    p[51] = 1;
+    p[51] = 100;
     
-    p[52] = 1;
+    p[52] = 100;
     
-    p[53] = 1;
+    p[53] = 100;
     
-    p[54] = 1;
+    p[54] = 100;
     
-    p[55] = 1;
+    p[55] = 100;
     
-    p[56] = 1;
+    p[56] = 100;
     
-    p[57] = 1;
+    p[57] = 100;
     
-    p[58] = 1;
+    p[58] = 100;
     
-    p[59] = 1;
+    p[59] = 100;
     
-    p[60] = 1;
+    p[60] = 100;
     
-    p[61] = 1;
+    p[61] = 100;
     
-    p[62] = 1;
+    p[62] = 100;
     
-    p[63] = 1;
+    p[63] = 100;
     
-    p[64] = 1;
+    p[64] = 100;
     
-    p[65] = 1;
+    p[65] = 100;
     
 
     for (int ii = 0; ii <= 20; ii++)
