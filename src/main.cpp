@@ -67,9 +67,11 @@ int main(int argc, char **argv){
   }
   
   model.init();
-  model.monitor_mmap_outputs = true;
-  model.monitor_parameters   = false;
-  model.print_solver_stats   = true;
+  
+  model.monitor_mmap_outputs  = true;
+  model.monitor_parameters    = false;
+  model.print_solver_stats    = true;
+  model.monitor_initial_guess = true;
 
 
   //  Solve 1st time 

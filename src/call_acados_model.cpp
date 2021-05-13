@@ -34,15 +34,21 @@ void Controller::monitor(){
         }
         std::cout<<" ]"<<std::endl;
 
+        std::cout<<"theta_guess = [ ";
+        for(int i = 0; i <= N; i++){
+            std::cout<<theta_guess[i]<<" , ";
+        }
+        std::cout<<" ]"<<std::endl;
+
         std::cout<<"s_guess = [ ";
-        for(int i = 0; i < N; i++){
+        for(int i = 0; i <= N; i++){
             std::cout<<s_guess[i]<<" , ";
         }
         std::cout<<" ]"<<std::endl;
 
         std::cout<<"sdot_guess = [ ";
         for(int i = 0; i < N; ++i){
-            std::cout<<i<<" "<<sdot_guess[i]<<" , ";
+            std::cout<<sdot_guess[i]<<" , ";
         }
         std::cout<<" ]"<<std::endl;
 
@@ -55,12 +61,6 @@ void Controller::monitor(){
         std::cout<<"w_guess = [ ";
         for(int i = 0; i < N; i++){
             std::cout<<w_guess[i]<<" , ";
-        }
-        std::cout<<" ]"<<std::endl;
-
-        std::cout<<"theta_guess = [ ";
-        for(int i = 0; i < N; i++){
-            std::cout<<theta_guess[i]<<" , ";
         }
         std::cout<<" ]"<<std::endl;
 
@@ -108,7 +108,7 @@ void Controller::create_path_guess(){
     double delta;
 
     if(x > X2){
-        delta = (X1 - X2)/(N);
+        delta = (X1 - X2)/(N+1);
         while( x >= X2 )
         {
             path_guess_x.push_back(x);
@@ -117,7 +117,7 @@ void Controller::create_path_guess(){
         }
     }
     else if(x < X2){
-        delta = (X2 - X1)/(N);
+        delta = (X2 - X1)/(N+1);
         while(x <= X2)
         {
             path_guess_x.push_back(x);
@@ -128,7 +128,7 @@ void Controller::create_path_guess(){
     }
     else if(x == X2){
 
-        delta = (abs(Y2 - y))/(N);
+        delta = (abs(Y2 - y))/(N+1);
 
         if(y < Y2){
 
@@ -150,31 +150,42 @@ void Controller::create_path_guess(){
         }
     }
 
+    std::cout<<"                        "<<std::endl;
+    std::cout<<"--------------------------- length of path_guess is = "<<path_guess_x.size()<<std::endl; // should be = 21
+    std::cout<<"                        "<<std::endl;
+
     // guesses for theta , v,  w 
 
     double xdot;
     double ydot;
 
     for(int i = 0; i<N ;i++){  //there is N+1 path guesses
+
         xdot = (path_guess_x[i+1] - path_guess_x[i])/dt;
         ydot = (path_guess_y[i+1] - path_guess_y[i])/dt;
-        v_guess[i] = sqrt(xdot*xdot + ydot*ydot);
+        v_guess[i] = sqrt(xdot*xdot + ydot*ydot);       // v guess is N
         theta_guess[i] = asin(ydot/v_guess[i]);
     } 
 
-    for(int i = 0; i<(N-1) ;i++){
-        w_guess[i] = (theta_guess[i+1] - theta_guess[i])/dt;
+    theta_guess[N] = theta_guess[N-1]; // theta guess is N+1
+
+    for(int i = 0; i<N ;i++){
+        w_guess[i] = (theta_guess[i+1] - theta_guess[i])/dt; //w guess is N+1
     }
-    w_guess[N-1]=w_guess[N-2];
 
 
-    // guesses for s and sdot
-    double deltas = 1.0/N;
+    // --------------- guesses for s and sdot
+
+    double deltas = 1.0/(N+1);
     s_guess[0] = 0;
     sdot_guess[0] = deltas/dt;
+
+    for (int i = 0; i<N ; i++){
+        s_guess[i+1] = s_guess[i] + delta;  // s guess is N+1
+    }
+
     for (int i = 1; i<N ; i++){
-        s_guess[i] = s_guess[i-1] + delta; 
-        sdot_guess[i] = deltas/dt;
+        sdot_guess[i] = deltas/dt;  // sdot is N
     }
 
 
@@ -356,34 +367,46 @@ void Controller::run_acados_solver()
 
     if (first_run){ // initialization of the first run
 
-        for(int i = 0; i<N ; i++){
+        for(int i = 0; i<=N ; i++){
 
             // states
-            x_init[i][0] = path_guess_x[i];
-            x_init[i][1] = path_guess_y[i];
-
             x_init[i][0] = path_guess_x[i];
             x_init[i][1] = path_guess_y[i];
             x_init[i][2] = theta_guess[i];
             x_init[i][3] = s_guess[i]; 
             x_init[i][4] = 0;
 
+            // x_init[i][0] = 0;
+            // x_init[i][1] = 0;
+            // x_init[i][2] = 0;
+            // x_init[i][3] = 0; 
+            // x_init[i][4] = 0;
+        }
+
+        for(int i = 0; i<N ; i++){
+
             //controls 
             u_init[i][0] = v_guess[i]; 
             u_init[i][1] = w_guess[i];
             u_init[i][2] = sdot_guess[i];
 
+            // u_init[i][0] = 0; 
+            // u_init[i][1] = 0;
+            // u_init[i][2] = 0;
+
         }
     }
     else{ //warm starting
 
-        for(int i = 0; i<N ; i++){
+        for(int i = 0; i<=N ; i++){
             
             x_init[i][0] = x_sol[i];
             x_init[i][1] = y_sol[i];
             x_init[i][2] = theta_sol[i];
-            x_init[i][3] = s_sol[i];       
-
+            x_init[i][3] = s_sol[i]; 
+        }
+        for(int i = 0; i<N ; i++){
+            
             u_init[i][0] = v_sol[i];
             u_init[i][1] = w_sol[i];
             u_init[i][2] = sdot_sol[i];
@@ -400,11 +423,15 @@ void Controller::run_acados_solver()
     for (int ii = 0; ii < NTIMINGS; ii++)
     {
         // initialize solution
-        for (int i = 0; i < N; i++) //this was <= why ?
+        for (int i = 0; i <= N; i++) 
         {   
             ocp_nlp_out_set(nlp_config, nlp_dims, nlp_out, i, "x", x_init[i]);
+        }
+        for (int i = 0; i < N; i++)
+        {   
             ocp_nlp_out_set(nlp_config, nlp_dims, nlp_out, i, "u", u_init[i]);
         }
+
         ocp_nlp_solver_opts_set(nlp_config, nlp_opts, "rti_phase", &rti_phase);
         status = rockit_model_acados_solve(acados_ocp_capsule);
         ocp_nlp_get(nlp_config, nlp_solver, "time_tot", &elapsed_time);
@@ -459,6 +486,9 @@ void Controller::run_acados_solver()
     first_run = false; // when this is called = it means that the first solution already exists
     
     Controller::monitor(); // monitor based on bools 
+
+    ocp_nlp_print_problem(nlp_config, nlp_dims, nlp_in, nlp_out); //addition
+
 
 }
 

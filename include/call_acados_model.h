@@ -113,11 +113,11 @@ class Controller{
     std::vector <double>  path_guess_x ;
     std::vector <double>  path_guess_y ;
 
-    double x_init[20][5];
-    double u_init[20][3];
+    double x_init[21][5];   // N+1 guess for states
+    double v_guess[21];
+    double w_guess[21];
 
-    double v_guess[20];
-    double w_guess[20];
+    double u_init[20][3];
     double theta_guess[20];
     double sdot_guess[20];
     double s_guess[20];
