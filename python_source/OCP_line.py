@@ -222,7 +222,8 @@ method = external_method('acados',
                         regularize_method = 'MIRROR' ,
                         integrator_type='DISCRETE',
                         nlp_solver_type='SQP',
-                        qp_solver_cond_N=N
+                        qp_solver_cond_N=N,
+                        linesearch=False
                         )
 
 ocp.method(method)

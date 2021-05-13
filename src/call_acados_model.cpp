@@ -487,8 +487,6 @@ void Controller::run_acados_solver()
     
     Controller::monitor(); // monitor based on bools 
 
-    ocp_nlp_print_problem(nlp_config, nlp_dims, nlp_in, nlp_out); //addition
-
 
 }
 

@@ -74,7 +74,7 @@ class Controller{
     void *nlp_opts;
 
     //number of states  
-    const int nx = 5;
+    const int nx = 6;
     //number of controls 
     const int nu = 3;
 
@@ -84,8 +84,8 @@ class Controller{
     std::map<std::string, casadi_real> outputs_sizes;
 
     // constraints variables 
-    double lbx0[5];
-    double ubx0[5];
+    double lbx0[6];
+    double ubx0[6];
     double ubu[3];
     double lbu[3];
     double lh[1];
@@ -113,7 +113,7 @@ class Controller{
     std::vector <double>  path_guess_x ;
     std::vector <double>  path_guess_y ;
 
-    double x_init[21][5];   // N+1 guess for states
+    double x_init[21][6];   // N+1 guess for states
     double v_guess[21];
     double w_guess[21];
 
